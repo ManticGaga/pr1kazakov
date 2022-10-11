@@ -17,4 +17,5 @@ public interface TurDao {
 
     @Query("SELECT * FROM tur")
     LiveData<List<mobil.baz.practice1.Tur>> getAllTurs();
+
 }
