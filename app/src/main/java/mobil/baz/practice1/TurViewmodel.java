@@ -9,8 +9,8 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 public class TurViewmodel extends AndroidViewModel {
-    TurRepository repository;
-    LiveData<List<Tur>> turList;
+    private TurRepository repository;
+    private LiveData<List<Tur>> turList;
 
     public TurViewmodel(Application application) {
         super(application);
