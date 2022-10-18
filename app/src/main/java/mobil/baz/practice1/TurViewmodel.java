@@ -11,16 +11,26 @@ import java.util.List;
 public class TurViewmodel extends AndroidViewModel {
     TurRepository repository;
     LiveData<List<Tur>> turList;
-    public TurViewmodel(Application application){
+
+    public TurViewmodel(Application application) {
         super(application);
         repository = new TurRepository(application);
-        turList= repository.getTur();
-    }
-    LiveData<List<Tur>> getAllTurs(){
-        return turList;
+        turList = repository.getAllTur();
     }
 
-    public void insertTur(Tur tur){
+    public void insertTur(Tur tur) {
         repository.insert(tur);
+    }
+
+    public void updateTur(Tur tur) {
+        repository.update(tur);
+    }
+
+    public void deleteTur(Tur tur) {
+        repository.delete(tur);
+    }
+
+    public LiveData<List<Tur>> getAllTur() {
+        return turList;
     }
 }

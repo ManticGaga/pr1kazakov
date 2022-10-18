@@ -5,34 +5,79 @@ import android.app.Person;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.Update;
 
 import java.util.List;
 
 public class TurRepository {
-    mobil.baz.practice1.TurDao turDao;
-    TurRepository(Application application){
-        mobil.baz.practice1.TurDatabase db = mobil.baz.practice1.TurDatabase.getDatabase(application);
+    private TurDao turDao;
+    private LiveData<List<Tur>> allTur;
+    TurRepository(Application application) {
+        TurDatabase db = TurDatabase.getDatabase(application);
         turDao = db.turDao();
+        allTur = turDao.getAllTurLive();
     }
 
-    LiveData<List<mobil.baz.practice1.Tur>> getTur() {
-        return turDao.getAllTurs();
+
+
+    public void insert(Tur tur) {
+        new InsertTurAsyncTask(turDao).execute(tur);
     }
 
-    void insert(Tur tur){
-        new insertAsyncTask(turDao).execute(tur);
+    public void update(Tur tur) {
+        new UpdateTurAsyncTask(turDao).execute(tur);
     }
-    private static class insertAsyncTask extends AsyncTask<Tur,Void,Void>{
-        private TurDao taskDao;
 
-        insertAsyncTask(TurDao turDao){
-            taskDao = turDao;
+    public void delete(Tur tur) {
+        new DeleteTurAsyncTask(turDao).execute(tur);
+    }
+
+    public LiveData<List<Tur>> getAllTur() {
+        return allTur;
+    }
+
+
+    private static class InsertTurAsyncTask extends AsyncTask<Tur, Void, Void>{
+        private TurDao turDAO;
+        private InsertTurAsyncTask(TurDao turDAO){
+            this.turDAO = turDAO;
         }
-    @Override
-        protected Void doInBackground(Tur... turers){
-            taskDao.insertAll(turers[0]);
+
+        @Override
+        protected Void doInBackground(Tur... tur) {
+            turDAO.insertTur(tur[0]);
             return null;
+        }
     }
+
+    private static class UpdateTurAsyncTask extends AsyncTask<Tur, Void, Void> {
+        private TurDao turDAO;
+
+        private UpdateTurAsyncTask(TurDao turDAO) {
+            this.turDAO = turDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Tur... tur) {
+            turDAO.updateTur(tur[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteTurAsyncTask extends AsyncTask<Tur, Void, Void> {
+        private TurDao turDAO;
+
+        private DeleteTurAsyncTask(TurDao turDAO) {
+            this.turDAO = turDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Tur... tur) {
+            turDAO.deleteTur(tur[0]);
+            return null;
+        }
 
     }
 

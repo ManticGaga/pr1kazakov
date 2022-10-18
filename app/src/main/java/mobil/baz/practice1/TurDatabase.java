@@ -11,8 +11,7 @@ import androidx.room.RoomDatabase;
 public abstract class TurDatabase extends RoomDatabase {
     public abstract mobil.baz.practice1.TurDao turDao();
 
-    public static TurDatabase INSTANCE;
-
+    public static volatile TurDatabase INSTANCE;
     public static TurDatabase getDatabase(final Context context){
         if(INSTANCE == null){
             synchronized (TurDatabase.class){

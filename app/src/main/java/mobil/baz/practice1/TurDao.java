@@ -4,8 +4,10 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -13,9 +15,20 @@ import java.util.List;
 public interface TurDao {
 
     @Insert
-    void insertAll(mobil.baz.practice1.Tur... turs);
+    public void insertTur(Tur tur);
+
+    @Update
+    public void updateTur(Tur tur);
+
+    @Delete
+    public void deleteTur(Tur tur);
 
     @Query("SELECT * FROM tur")
-    LiveData<List<mobil.baz.practice1.Tur>> getAllTurs();
+    LiveData<List<mobil.baz.practice1.Tur>> getAllTur();
 
+    @Query("select * from tur where name ==:name ")
+    public Tur getTur(String name);
+
+    @Query("SELECT * FROM tur")
+    public LiveData<List<Tur>> getAllTurLive();
 }

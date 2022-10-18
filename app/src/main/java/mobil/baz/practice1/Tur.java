@@ -22,4 +22,28 @@ public class Tur {
         this.travel = travel;
         this.living = living;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTravel() {
+        return travel;
+    }
+
+    public void setTravel(String theme) {
+        this.travel = travel;
+    }
+
+    public String getLiving() {
+        return living;
+    }
+
+    public void setLiving(String text) {
+        this.living = living;
+    }
 }

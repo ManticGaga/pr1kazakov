@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(context, text, duration).show();
 
         });
-        viewmodel.getAllTurs().observe(this, turList ->{
+        viewmodel.getAllTur().observe(this, turList ->{
             for(Tur list: turList){
                 Log.d("Tur",list.name+" "+list.travel+" "+list.living);
             }
